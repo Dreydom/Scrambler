@@ -79,18 +79,7 @@ namespace Scrambler
             }
             return output;
         }
-        static string ScrAdd(string input, string RG, int m, int n)
-        {
-            string output = "";
-            foreach (char c in input)
-            {
-                char ch = Xor(RG[m - 1], RG[n - 1]);
-                output += Xor(c, ch);
-                RG = RG.Insert(0, ch.ToString()).Remove(m);
-            }
-            return output;
-        }
-        static string DescrAdd(string input, string RG, int m, int n)
+        static string ScrAdd(string input, string RG, int m, int n) //Скремблер == дескремблер
         {
             string output = "";
             foreach (char c in input)
@@ -122,9 +111,9 @@ namespace Scrambler
                 Console.WriteLine("Дескр. синхр.: {0}", descrsync/*, PAKF(descrsync)*/);
                 string scradd = ScrAdd(input, RG1, m, n);
                 Console.WriteLine("Скр. адд.:     {0}", scradd/*, PAKF(scradd)*/);
-                string descradd = DescrAdd(scradd, RG1, m, n);
+                string descradd = ScrAdd(scradd, RG1, m, n);
                 Console.WriteLine("Дескр. адд.:   {0}", descradd/*, PAKF(descradd)*/);
-                Console.WriteLine();
+                Console.WriteLine(); 
             }
             
         }
