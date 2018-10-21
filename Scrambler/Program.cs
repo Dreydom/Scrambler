@@ -37,21 +37,17 @@ namespace Scrambler
         static string PAKF(string input)
         {
             string bytes = input;
-            string output = "";               //график
             int len = bytes.Length;
             List<int> C = new List<int>();
             for (int i = 0; i < input.Length; i++)
             {
                 int w = And(input, bytes);
                 C.Add(w);
-                output += new string('█', w); //график
-                output += Environment.NewLine;//график
                 string last = bytes[len - 1].ToString();
                 bytes = bytes.Insert(0, last);
                 bytes = bytes.Remove(len);
             }
-            return output; //график
-            //return String.Format("C: {0}", String.Join(",", C)); //если просто нужны значения
+            return String.Format("PAKF: {0}", String.Join(",", C));
         }
         static char Xor(char c1, char c2)
         {
@@ -104,15 +100,17 @@ namespace Scrambler
                 RG1 += ('1');
                 Console.Write("Введите строку: ");
                 string input = TextToBinary(Console.ReadLine());
-                Console.WriteLine("Сообщение:     {0}", input/*, PAKF(input)*/);
+                Console.WriteLine("Сообщение:     {0}", input);
                 string scrsync = ScrSync(input, RG1, m, n);
-                Console.WriteLine("Скр. синхр.:   {0}", scrsync/*, PAKF(scrsync)*/);
+                Console.WriteLine("Скр. синхр.:   {0}", scrsync);
+                //Console.WriteLine(PAKF(scrsync.Substring(0, (int)Math.Pow(2,m)-1)));
                 string descrsync = DescrSync(scrsync, RG1, m, n);
-                Console.WriteLine("Дескр. синхр.: {0}", descrsync/*, PAKF(descrsync)*/);
+                Console.WriteLine("Дескр. синхр.: {0}", descrsync);
                 string scradd = ScrAdd(input, RG1, m, n);
-                Console.WriteLine("Скр. адд.:     {0}", scradd/*, PAKF(scradd)*/);
+                Console.WriteLine("Скр. адд.:     {0}", scradd);
+                //Console.WriteLine(PAKF(scradd.Substring(0, (int)Math.Pow(2, m) - 1)));
                 string descradd = ScrAdd(scradd, RG1, m, n);
-                Console.WriteLine("Дескр. адд.:   {0}", descradd/*, PAKF(descradd)*/);
+                Console.WriteLine("Дескр. адд.:   {0}", descradd);
                 Console.WriteLine(); 
             }
             
